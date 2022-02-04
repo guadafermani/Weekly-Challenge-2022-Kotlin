@@ -20,3 +20,36 @@ package com.mouredev.weeklychallenge2022
  *
  */
 
+fun main() {
+    area(Triangle(3.0, 4.0))
+    area(Rectangle(4.0, 5.0))
+    area(Square(6.0))
+}
+
+interface Polygon{
+    fun area()
+}
+
+data class Triangle(val base: Double, val height: Double): Polygon{
+    override fun area() {
+        val area = base * height / 2
+        println("El área del triángulo de base $base y altura $height es $area")
+    }
+}
+
+data class Rectangle(val length: Double, val width: Double): Polygon{
+    override fun area() {
+        val area = length * width
+        println("El área del rectángulo de largo $length y ancho $width es $area")
+    }
+}
+data class Square(val side: Double): Polygon{
+    override fun area() {
+        val area = side * side
+        println("El área del cuadrado de lado $side es $area")
+    }
+}
+
+private fun area(polygon: Polygon){
+    polygon.area()
+}
