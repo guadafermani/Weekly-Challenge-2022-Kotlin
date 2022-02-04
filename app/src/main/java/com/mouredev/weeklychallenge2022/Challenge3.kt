@@ -19,5 +19,18 @@ package com.mouredev.weeklychallenge2022
  */
 
 fun main() {
+    (1..100).forEach { i ->
+            if (isPrime(i)){
+                println(i)
+            }
+        }
+}
 
+fun isPrime(n: Int): Boolean{
+    if (n < 2) return false
+
+    for (i in 2 until n){
+        if (n % i == 0) return false
+    }
+    return true
 }
