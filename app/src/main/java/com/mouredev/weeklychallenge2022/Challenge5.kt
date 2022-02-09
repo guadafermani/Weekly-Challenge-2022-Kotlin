@@ -1,5 +1,9 @@
 package com.mouredev.weeklychallenge2022
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import java.net.URL
+
 /*
  * Reto #5
  * ASPECT RATIO DE UNA IMAGEN
@@ -19,3 +23,32 @@ package com.mouredev.weeklychallenge2022
  *
  */
 
+class Challenge5 {
+
+    fun calculateAspectRatio(src: String) {
+        Thread {
+            val image = getImageFromURL(src)
+            val width = image.width
+            val height = image.height
+            val gcd = Challenge5().gcd(width, height)
+            println("El aspect ratio de la imagen es: ${width / gcd} : ${height / gcd}")
+        }.start()
+    }
+
+    fun getImageFromURL(src: String): Bitmap {
+        val url = URL(src)
+        return BitmapFactory.decodeStream(url.openStream())
+    }
+
+    private fun gcd(number1: Int, number2: Int): Int {
+        var n1 = number1
+        var n2 = number2
+        while (n1 != n2) {
+            if (n1 > n2)
+                n1 -= n2
+            else
+                n2 -= n1
+        }
+        return n1
+    }
+}
