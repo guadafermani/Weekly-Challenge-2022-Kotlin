@@ -1,5 +1,7 @@
 package com.mouredev.weeklychallenge2022
 
+import java.util.*
+
 /*
  * Reto #10
  * EXPRESIONES EQUILIBRADAS
@@ -20,4 +22,28 @@ package com.mouredev.weeklychallenge2022
  * - Subiré una posible solución al ejercicio el lunes siguiente al de su publicación.
  *
  */
+
+fun main(){
+    println("Es balanceada la expresión \"{a + b [c] * (2x2)}}}}\"? Respuesta esperada: false, Respuesta obtenida: ${isBalanced("{a + b [c] * (2x2)}}}}")}")
+    println("Es balanceada la expresión \"{ [ a * ( c + d ) ] - 5 }\"? Respuesta esperada: true, Respuesta obtenida: ${isBalanced("{ [ a * ( c + d ) ] - 5 }")}")
+    println("Es balanceada la expresión \"{ a * ( c + d ) ] - 5 }\"? Respuesta esperada: false, Respuesta obtenida: ${isBalanced("{ a * ( c + d ) ] - 5 }")}")
+    println("Es balanceada la expresión \"{a^4 + (((ax4)}\"? Respuesta esperada: false, Respuesta obtenida: ${isBalanced("{a^4 + (((ax4)}")}")
+    println("Es balanceada la expresión \"{ ] a * ( c + d ) + ( 2 - 3 )[ - 5 }\"? Respuesta esperada: false, Respuesta obtenida: ${isBalanced("{ ] a * ( c + d ) + ( 2 - 3 )[ - 5 }")}")
+    println("Es balanceada la expresión \"{{{{{{(}}}}}}\"? Respuesta esperada: false, Respuesta obtenida: ${isBalanced("{{{{{{(}}}}}}")}")
+    println("Es balanceada la expresión \"(a\"? Respuesta esperada: false, Respuesta obtenida: ${isBalanced("(a")}")
+}
+
+fun isBalanced(expression: String): Boolean {
+    val symbols = mapOf('{' to '}', '[' to ']', '(' to ')')
+    val stack = Stack<Char>()
+
+    expression.forEach { symbol ->
+        if (symbols.containsKey(symbol)) stack.push(symbol)
+        else if (symbols.containsValue(symbol) && (stack.isEmpty() || symbol != symbols[stack.pop()])) {
+            return false
+        }
+    }
+
+    return stack.isEmpty()
+}
 
